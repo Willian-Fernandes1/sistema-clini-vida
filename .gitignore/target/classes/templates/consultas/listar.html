@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultas - CliniVida</title>
+</head>
+<body>
+
+<div class="container mt-4">
+    <div style="background: linear-gradient(135deg, #7209b7 0%, #b5179e 100%);
+                color: white; padding: 20px; border-radius: 10px;
+                margin-bottom: 25px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+        <h3 class="mb-0 text-center">📅 Gerenciamento de Consultas</h3>
+    </div>
+
+    <div class="text-end mb-3">
+      <a th:href="@{${'/consultas/novo'}}"
+         class="btn btn-purple px-4 shadow-sm"
+         style="background-color:#9d4edd; color:white; border-radius:8px; font-weight:500;">
+         ➕ Nova Consulta
+      </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <table class="table table-hover align-middle">
+                <thead style="background-color: #f3e8ff;">
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Médico</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Observações</th> <!-- ✅ nova coluna -->
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="c : ${consultas}">
+                        <td th:text="${c.paciente.nome}"></td>
+                        <td th:text="${c.medico.nome}"></td>
+                        <td th:text="${#temporals.format(c.data, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${c.hora}"></td>
+                        <td th:text="${c.observacoes}" class="text-muted fst-italic"></td> <!-- ✅ exibe observação -->
+                        <td class="text-center">
+                            <a th:href="@{'/consultas/editar/' + ${c.id}}" 
+                               class="btn btn-outline-primary btn-sm me-1">✏️ Editar</a>
+                            <a th:href="@{'/consultas/excluir/' + ${c.id}}" 
+                               class="btn btn-outline-danger btn-sm"
+                               onclick="return confirm('Deseja realmente excluir esta consulta?');">🗑️ Excluir</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(consultas)}">
+                        <td colspan="6" class="text-center text-muted">Nenhuma consulta cadastrada</td> <!-- ✅ colspan ajustado -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

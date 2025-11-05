@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Consulta - CliniVida</title>
+</head>
+<body>
+
+<div class="container mt-4">
+    <div style="background: linear-gradient(135deg, #7209b7 0%, #b5179e 100%);
+                color: white; padding: 20px; border-radius: 10px;
+                margin-bottom: 25px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+        <h3 class="mb-0 text-center">📅 Agendamento de Consulta</h3>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form th:action="@{/consultas/salvar}" th:object="${consulta}" method="post">
+				<input type="hidden" th:field="*{id}">
+				
+                <!-- Campo Paciente -->
+                <div class="mb-3">
+                    <label class="form-label">Paciente</label>
+                  	<select th:field="*{paciente.id}" class="form-select" required>
+    <option th:each="p : ${pacientes}" th:value="${p.id}" th:text="${p.nome}"></option>
+</select>  
+                </div>
+
+                <!-- Campo Médico -->
+                <div class="mb-3">
+                    <label class="form-label">Médico</label>
+                    <select th:field="*{medico.id}" class="form-select" required>
+    <option th:each="m : ${medicos}" th:value="${m.id}" th:text="${m.nome}"></option>
+</select>
+                </div>
+
+                <!-- Data e Hora -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Data</label>
+                        <input type="date" th:field="*{data}" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Hora</label>
+                        <input type="time" th:field="*{hora}" class="form-control" required>
+                    </div>
+                </div>
+
+                <!-- Observações -->
+                <div class="mb-3">
+                    <label class="form-label">Observações</label>
+                    <textarea th:field="*{observacoes}" class="form-control" rows="3"></textarea>
+                </div>
+
+                <!-- Botões -->
+                <div class="text-end">
+                    <a th:href="@{/consultas}" class="btn btn-secondary">⬅ Voltar</a>
+                    <button type="submit" class="btn" 
+                            style="background-color:#9d4edd; color:white;">💾 Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

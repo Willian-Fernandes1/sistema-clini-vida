@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - CliniVida</title>
+
+    <!-- ✅ Importando o CSS corretamente -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="container mt-5">
+
+<div class="col-md-4 offset-md-4 border p-4 rounded">
+    <h3 class="text-center mb-3">CliniVida - Login</h3>
+
+    <!-- ✅ Formulário correto -->
+    <form th:action="@{/login}" method="post">
+
+        <div class="mb-3">
+            <label class="form-label">Usuário</label>
+            <input name="username" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Senha</label>
+            <input name="password" type="password" class="form-control"/>
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </div>
+
+        <!-- ✅ Exibe erro quando login falha -->
+        <div th:if="${param.error}" class="alert alert-danger mt-3">
+            Usuário ou senha inválidos.
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

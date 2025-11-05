@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br"
+      th:replace="~{layout :: layout(~{::body})}">
+<head>
+    <title>Pacientes - CliniVida</title>
+</head>
+<body>
+    <div class="container-fluid" style="padding: 30px;">
+        <h2 style="color: #4361ee; font-weight: 700; margin-bottom: 25px;">👤 Pacientes</h2>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <p style="color: #6c757d; margin: 0;">Gerencie os pacientes cadastrados no sistema</p>
+            <a th:href="@{/pacientes/novo}" 
+               style="background-color: #06d6a0; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">
+               ➕ Novo Paciente
+            </a>
+        </div>
+
+        <div th:if="${pacientes.size() == 0}" 
+             style="text-align: center; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); color: #888;">
+            Nenhum paciente cadastrado ainda.
+        </div>
+
+        <table th:if="${pacientes.size() > 0}" class="table table-striped table-bordered shadow-sm">
+            <thead style="background-color: #4361ee; color: white;">
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th style="width: 180px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${pacientes}" class="align-middle text-center">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.nome}"></td>
+                    <td th:text="${p.cpf}"></td>
+                    <td th:text="${p.telefone}"></td>
+                    <td>
+                        <a th:href="@{'/pacientes/editar/' + ${p.id}}" 
+                           style="background-color: #ffc107; color: black; border-radius: 6px; padding: 6px 12px; text-decoration: none; margin-right: 5px;">✏️</a>
+                        <a th:href="@{'/pacientes/excluir/' + ${p.id}}" 
+                           style="background-color: #dc3545; color: white; border-radius: 6px; padding: 6px 12px; text-decoration: none;"
+                           onclick="return confirm('Tem certeza que deseja excluir este paciente?');">🗑️</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

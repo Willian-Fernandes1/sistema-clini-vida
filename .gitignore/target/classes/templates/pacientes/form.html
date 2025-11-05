@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br"
+      th:replace="~{layout :: layout(~{::body})}">
+<head>
+    <title>Novo Paciente - CliniVida</title>
+</head>
+<body>
+    <div class="container-fluid" style="padding: 30px;">
+        <h2 style="color: #4361ee; font-weight: 700; margin-bottom: 25px;"
+            th:text="${paciente.id == null ? '➕ Novo Paciente' : '✏️ Editar Paciente'}"></h2>
+
+        <form th:action="@{/pacientes/salvar}" method="post" th:object="${paciente}"
+              style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); max-width: 600px;">
+            
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="mb-3">
+                <label style="font-weight: 500;">Nome:</label>
+                <input type="text" th:field="*{nome}" class="form-control" placeholder="Nome completo" required>
+            </div>
+
+            <div class="mb-3">
+                <label style="font-weight: 500;">CPF:</label>
+                <input type="text" th:field="*{cpf}" class="form-control" placeholder="000.000.000-00" required>
+            </div>
+
+            <div class="mb-3">
+                <label style="font-weight: 500;">Telefone:</label>
+                <input type="text" th:field="*{telefone}" class="form-control" placeholder="(00) 00000-0000">
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+                <a th:href="@{/pacientes}" 
+                   style="background-color: #adb5bd; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none;">
+                   ⬅️ Voltar
+                </a>
+                <button type="submit" 
+                        style="background-color: #4361ee; color: white; padding: 10px 25px; border: none; border-radius: 6px; font-weight: 500;">
+                    💾 Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
