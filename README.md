@@ -49,9 +49,9 @@ No arquivo application.properties, altere para:
 spring.profiles.active=mariadb
 
 #### Configuração do application-mariadb.properties
-spring.datasource.url=jdbc:mariadb://localhost:3308/clini_vida?useSSL=false
+spring.datasource.url=jdbc:mariadb://localhost:3306/clini_vida?useSSL=false
 spring.datasource.username=root
-spring.datasource.password=Mariadev012%
+spring.datasource.password=SUA-SENHA
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 
@@ -63,7 +63,7 @@ FLUSH PRIVILEGES;
 Abaixo está o passo a passo de como acessar o MariaDB, criar o banco de dados do sistema e configurar o usuário com permissões adequadas:
 
 ### Abrindo o MariaDB pelo Terminal cmd do windowns
-C:\Windows\system32\cmd.exe - "C:\Program Files\MariaDB 12.0\bin\mysql" -u root -p --port=3308
+C:\Windows\system32\cmd.exe - "C:\Program Files\MariaDB 12.0\bin\mysql" -u root -p --port=3306
 
 Explicação linha por linha pra entender melhor essa parte:
 
@@ -73,7 +73,7 @@ Explicação linha por linha pra entender melhor essa parte:
 | "C:\Program Files\MariaDB 12.0\bin\mysql" | Caminho para o executável do cliente mysql do MariaDB. |
 | -u root | Especifica o usuário que fará o login (no caso, o usuário administrador root). |
 | -p | Indica que será solicitada a senha após pressionar Enter. |
-| --port=3308 | Informa que o MariaDB está rodando na porta 3308 (e não na porta padrão 3306). |
+| --port=3308 | Informa que o MariaDB está rodando na porta 3306 (e não na porta padrão 3306). |
 
 Após executar o comando, o terminal pedirá a senha:
 Enter password: ************
